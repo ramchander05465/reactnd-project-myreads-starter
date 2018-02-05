@@ -172,3 +172,7 @@ body, .app {
   text-align: center;
   font-size: 0.8em;
 }
+
+.check-mark{
+    color:#2e7c31;
+}
