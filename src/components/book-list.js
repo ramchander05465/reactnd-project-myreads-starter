@@ -14,7 +14,7 @@ const bookList = (props) => {
                             <option value="currentlyReading" className={item.shelf === "currentlyReading" ? 'check-mark':''}>Currently Reading</option>
                             <option value="wantToRead" className={item.shelf === "wantToRead" ? 'check-mark':''}>Want to Read</option>
                             <option value="read" className={item.shelf === "read" ? 'check-mark':''}>Read</option>
-                            <option value="none">None</option>
+                            <option value="none"  className={item.shelf === "none" ? 'check-mark':''}>None</option>
                         </select>
                     </div>
                 </div>
