@@ -9,7 +9,8 @@ class SearchBooks extends Component{
     }
     
     searchBook = (query) => {
-        bookApi.search(query).then((res) => {
+        if(query !== ""){
+        bookApi.search(query).then((res) => {           
             let shelfHistory = JSON.parse(localStorage.getItem('shelfHistory'));
             let updatedResponse = res.map(book => {
                 book.shelf='none'
@@ -23,6 +24,7 @@ class SearchBooks extends Component{
             });
             this.setState({searchItem:updatedResponse})
         })
+    }
     }
 
     onShelfChangeHandler = (book, shelf) => {
@@ -44,7 +46,8 @@ class SearchBooks extends Component{
                     shelf:shelf
                 })
 			}
-            localStorage.setItem('shelfHistory', JSON.stringify(shelfHistory))
+            localStorage.setItem('shelfHistory', JSON.stringify(shelfHistory));
+            alert('Bookshelf has been changed');
         })
     }
 
@@ -53,7 +56,7 @@ class SearchBooks extends Component{
             <div className="search-books">
                 <Search search={this.searchBook} />
                 <div className="search-books-results">
-                    {this.state.searchItem.length ? <BookList list={this.state.searchItem} shelftype="all" onShelfChange={this.onShelfChangeHandler} />:null}
+                    {this.state.searchItem.length ? <BookList list={this.state.searchItem} shelftype="all" onShelfChange={this.onShelfChangeHandler} />:<div>No records found</div>}
                 </div>
           </div>
         )
