@@ -43,33 +43,24 @@ class BooksShelf extends Component{
         })
     }
 
+    renderBookItems=()=>{
+        let shelfType=[{type:'currentlyReading', title:"Currently Reading"}, {type:'wantToRead', title:"Wanted To Read"}, {type:'read', title:"Read"}];
+        return shelfType.map(type => (
+            <div className="bookshelf" key={type.type}>
+                <h2 className="bookshelf-title">{type.title}</h2>
+                <div className="bookshelf-books">
+                    <BookList list={this.state.books} shelftype={type.type} onShelfChange={this.onShelfChangeHandler} />
+                </div>
+            </div>
+        ))
+    }
+
     render(){
         return(
             <div className="list-books">
                 <Header />
                 <div className="list-books-content">
-                    <div>
-                        <div className="bookshelf">
-                            <h2 className="bookshelf-title">Currently Reading</h2>
-                            <div className="bookshelf-books">
-                                <BookList list={this.state.books} shelftype="currentlyReading" onShelfChange={this.onShelfChangeHandler} />
-                            </div>
-                        </div>
-                        <div className="bookshelf">
-                            <h2 className="bookshelf-title">Wanted to Read</h2>
-                            <div className="bookshelf-books">
-                                <BookList list={this.state.books} shelftype="wantToRead" onShelfChange={this.onShelfChangeHandler} />
-                            </div>
-                        </div>
-
-                        <div className="bookshelf">
-                        <h2 className="bookshelf-title">Read</h2>
-                            <div className="bookshelf-books">
-                                <BookList list={this.state.books} shelftype="read" onShelfChange={this.onShelfChangeHandler} />
-                            </div>
-                        </div>
-
-                    </div>
+                {this.renderBookItems()}
                 </div>
                 <div className="open-search">
                     <NavLink to="/search" >Add a book</NavLink>
